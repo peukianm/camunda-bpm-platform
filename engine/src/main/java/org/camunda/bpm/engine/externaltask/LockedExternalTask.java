@@ -17,6 +17,7 @@
 package org.camunda.bpm.engine.externaltask;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.camunda.bpm.engine.ExternalTaskService;
 import org.camunda.bpm.engine.variable.VariableMap;
@@ -133,5 +134,24 @@ public interface LockedExternalTask {
    * @return the business key
    */
   String getBusinessKey();
+
+  /**
+   * Returns a map of custom extension properties if the fetch instructions
+   * indicate to include extension properties.
+   * 
+   * If the fetch-and-lock-query was not instructed to include extension
+   * properties, this method will return <code>null</code>.
+   * 
+   * If extension properties are included, the returned map contains any
+   * extension property that is defined in the model definition of the external
+   * task. If no extension properties are defined for the external task, the map
+   * will be empty.
+   * 
+   * @return a potentially empty map of all defined custom extension properties
+   *         if the fetch-and-lock instructions include extension properties,
+   *         <code>null</code> if extension properties are not included in the
+   *         fetch-and-lock instructions.
+   */
+  Map<String, String> getExtensionProperties();
 
 }
